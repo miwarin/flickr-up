@@ -10,11 +10,24 @@ using System.Windows.Forms;
 using FlickrNet;
 using System.Diagnostics;
 using System.Threading;
+using System.IO;
 
 namespace flickr_up
 {
     public partial class frmMain : Form
     {
+
+        class PhotoLocal
+        {
+            public PhotoLocal(String path, String title)
+            {
+                this.Path = path;
+                this.Title = title;
+            }
+            public String Path { get; set; }
+            public String Title { get; set; }
+        }
+
         private OAuthRequestToken RequestToken;
 
         public frmMain()
@@ -64,8 +77,13 @@ namespace flickr_up
 
         private void bgWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            String Photofile = txtPhotoPath.Text;
-            String Title = "it's upload trial.";
+            List<PhotoLocal> PhotofileList = GetPhotoPathList(txtPhotoPath.Text);
+            if(PhotofileList == null)
+            {
+                MessageBox.Show("JPEG のフォルダを指定してください");
+                return;
+            }
+
             String Desc = txtDescription.Text;
             String Tags = txtTags.Text;
             String Sets = txtSets.Text;
@@ -74,7 +92,11 @@ namespace flickr_up
 
             Flickr f = FlickrManager.GetAuthInstance();
             f.OnUploadProgress += new EventHandler<FlickrNet.UploadProgressEventArgs>(Flickr_OnUploadProgress);
-            PhotoID.Add(f.UploadPicture(Photofile, Title, Desc, Tags, IsPrivate, false, false));
+
+            foreach (PhotoLocal photofile in PhotofileList)
+            {
+                PhotoID.Add(f.UploadPicture(photofile.Path, photofile.Title, Desc, Tags, IsPrivate, false, false));
+            }
 
             if (String.IsNullOrEmpty(Sets) == true)
             {
@@ -131,6 +153,30 @@ namespace flickr_up
             else
                 e.Effect = DragDropEffects.None;
 
+        }
+
+        private List<PhotoLocal> GetPhotoPathList(String PhotoDir)
+        {
+            List<PhotoLocal> list = new List<PhotoLocal>();
+
+            if (Directory.Exists(PhotoDir) == false)
+            {
+                return null;
+            }
+
+            string[] files = Directory.GetFiles(PhotoDir);
+            foreach(String file in files)
+            {
+                String ext = Path.GetExtension(file).ToLower();
+                if(ext == ".jpg")
+                {
+                    String title = Path.GetFileName(file);
+                    PhotoLocal p = new PhotoLocal(file, title);
+                    list.Add(p);
+                }
+            }
+
+            return list;
         }
 
         private String GetPhotoSetID(String Sets)
