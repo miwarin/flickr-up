@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using FlickrNet;
+using System.Diagnostics;
+using System.Threading;
 
 namespace flickr_up
 {
@@ -55,11 +57,6 @@ namespace flickr_up
             }
         }
 
-        private void txtResult_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnUpload_Click(object sender, EventArgs e)
         {
             bgWorker.RunWorkerAsync();
@@ -71,11 +68,39 @@ namespace flickr_up
             String Title = "it's upload trial.";
             String Desc = txtDescription.Text;
             String Tags = txtTags.Text;
+            String Sets = txtSets.Text;
             Boolean IsPrivate = false;
+            List<String> PhotoID = new List<String>();
 
             Flickr f = FlickrManager.GetAuthInstance();
             f.OnUploadProgress += new EventHandler<FlickrNet.UploadProgressEventArgs>(Flickr_OnUploadProgress);
-            String photo_id = f.UploadPicture(Photofile, Title, Desc, Tags, IsPrivate, false, false);
+            PhotoID.Add(f.UploadPicture(Photofile, Title, Desc, Tags, IsPrivate, false, false));
+
+            if (String.IsNullOrEmpty(Sets) == true)
+            {
+                return;
+            }
+
+            int StartIndex = 0;
+            String PhotosetID;
+
+            PhotosetID = GetPhotoSetID(Sets);
+            if (PhotosetID == "")
+            {
+                Photoset photoset = f.PhotosetsCreate(Sets, PhotoID[0]);
+                PhotosetID = photoset.PhotosetId;
+                StartIndex++;
+            }
+
+            if (StartIndex >= PhotoID.Count)
+            {
+                return;
+            }
+
+            for (int i = StartIndex; i < PhotoID.Count; i++)
+            {
+                f.PhotosetsAddPhoto(PhotosetID, PhotoID[i]);
+            }
         }
 
         private void Flickr_OnUploadProgress(object sender, FlickrNet.UploadProgressEventArgs e)
@@ -108,15 +133,20 @@ namespace flickr_up
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private String GetPhotoSetID(String Sets)
         {
+            Flickr f = FlickrManager.GetAuthInstance();
+            PhotosetCollection photosets = f.PhotosetsGetList();
 
+            foreach (Photoset pset in photosets)
+            {
+                if (Sets == pset.Title)
+                {
+                    return pset.PhotosetId;
+                }
+                Console.WriteLine(pset.Title);
+            }
+            return "";
         }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
     }
 }

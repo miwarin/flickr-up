@@ -9,8 +9,8 @@ namespace flickr_up
 {
     public class FlickrManager
     {
-        public const String APIKey = "apikey";
-        public const String Secret = "secret";
+        public const String APIKey = "";
+        public const String Secret = "";
         
         public static Flickr GetInstance()
         {

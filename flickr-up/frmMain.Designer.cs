@@ -41,6 +41,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtSets = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnAuth
@@ -80,7 +82,6 @@
             this.txtResult.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtResult.Size = new System.Drawing.Size(788, 97);
             this.txtResult.TabIndex = 3;
-            this.txtResult.TextChanged += new System.EventHandler(this.txtResult_TextChanged);
             // 
             // btnUpload
             // 
@@ -147,28 +148,47 @@
             // txtDescription
             // 
             this.txtDescription.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txtDescription.Location = new System.Drawing.Point(357, 101);
+            this.txtDescription.Location = new System.Drawing.Point(357, 126);
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtDescription.Size = new System.Drawing.Size(443, 177);
+            this.txtDescription.Size = new System.Drawing.Size(443, 141);
             this.txtDescription.TabIndex = 11;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(316, 104);
+            this.label1.Location = new System.Drawing.Point(316, 135);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 12;
             this.label1.Text = "説明";
-            this.label1.Click += new System.EventHandler(this.label1_Click_1);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(316, 108);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(28, 12);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "Sets";
+            // 
+            // txtSets
+            // 
+            this.txtSets.AllowDrop = true;
+            this.txtSets.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txtSets.Location = new System.Drawing.Point(357, 101);
+            this.txtSets.Name = "txtSets";
+            this.txtSets.Size = new System.Drawing.Size(443, 19);
+            this.txtSets.TabIndex = 13;
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(815, 433);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtSets);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.label3);
@@ -203,6 +223,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtSets;
     }
 }
 
