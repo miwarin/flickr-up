@@ -13,8 +13,6 @@ namespace flickr_up
 {
     public partial class frmMain : Form
     {
-        private String APIKey = "apikey";
-        private String Secret = "secret";
         private OAuthRequestToken RequestToken;
 
         public frmMain()
@@ -24,7 +22,7 @@ namespace flickr_up
 
         private void btnAuth_Click(object sender, EventArgs e)
         {
-            Flickr flickr = new Flickr(APIKey, Secret);
+            Flickr flickr = FlickrManager.GetInstance();
 
             // what's "oob" ?
             // I have tried "flickr-up", then error. hmm...
@@ -43,13 +41,13 @@ namespace flickr_up
                 return;
             }
 
-            Flickr flickr = new Flickr(APIKey, Secret);
+            Flickr flickr = FlickrManager.GetInstance();
             try
             {
                 var Accsesstoken = flickr.OAuthGetAccessToken(RequestToken, verify);
                 txtResult.AppendText("ok");
                 txtResult.AppendText(Accsesstoken.FullName);
-
+                Config.OAuthToken = Accsesstoken;
             }
             catch(FlickrApiException ex)
             {
