@@ -9,17 +9,14 @@ namespace flickr_up
 {
     public class FlickrManager
     {
-        public const String APIKey = "";
-        public const String Secret = "";
-        
         public static Flickr GetInstance()
         {
-            return new Flickr(APIKey, Secret);
+            return new Flickr(Config.APIKey, Config.Secret);
         }
 
         public static Flickr GetAuthInstance()
         {
-            Flickr f = new Flickr(APIKey, Secret);
+            Flickr f = new Flickr(Config.APIKey, Config.Secret);
             f.OAuthAccessToken = Config.OAuthToken.Token;
             f.OAuthAccessTokenSecret = Config.OAuthToken.TokenSecret;
             return f;

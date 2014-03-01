@@ -34,6 +34,32 @@ namespace flickr_up
                 Properties.Settings.Default.Save();
             }
         }
+
+        public static String PhotoDirectory
+        {
+            get
+            {
+                return Properties.Settings.Default.PhotoDirectory;
+            }
+            set
+            {
+                Properties.Settings.Default.PhotoDirectory = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        public static String IMConvertPath
+        {
+            get
+            {
+                return Properties.Settings.Default.IMConvertPath;
+            }
+            set
+            {
+                Properties.Settings.Default.IMConvertPath = value;
+                Properties.Settings.Default.Save();
+            }
+        }
         
         public static OAuthAccessToken OAuthToken
         {

@@ -57,5 +57,29 @@ namespace flickr_up.Properties {
                 this["OAuthToken"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PhotoDirectory {
+            get {
+                return ((string)(this["PhotoDirectory"]));
+            }
+            set {
+                this["PhotoDirectory"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string IMConvertPath {
+            get {
+                return ((string)(this["IMConvertPath"]));
+            }
+            set {
+                this["IMConvertPath"] = value;
+            }
+        }
     }
 }

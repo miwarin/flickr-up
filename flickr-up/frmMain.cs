@@ -33,6 +33,7 @@ namespace flickr_up
         public frmMain()
         {
             InitializeComponent();
+            SetupWindow();
         }
 
         private void btnAuth_Click(object sender, EventArgs e)
@@ -78,7 +79,7 @@ namespace flickr_up
         private void bgWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             List<PhotoLocal> PhotofileList = GetPhotoPathList(txtPhotoPath.Text);
-            if(PhotofileList == null)
+            if (PhotofileList == null || PhotofileList.Count == 0)
             {
                 MessageBox.Show("JPEG のフォルダを指定してください");
                 return;
@@ -95,6 +96,7 @@ namespace flickr_up
 
             foreach (PhotoLocal photofile in PhotofileList)
             {
+                txtResult.AppendText(photofile.Title + " ...\n");
                 PhotoID.Add(f.UploadPicture(photofile.Path, photofile.Title, Desc, Tags, IsPrivate, false, false));
             }
 
@@ -102,6 +104,8 @@ namespace flickr_up
             {
                 return;
             }
+
+            txtResult.AppendText(String.Format("Create Sets: ${0} ...\n", Sets));
 
             int StartIndex = 0;
             String PhotosetID;
@@ -137,7 +141,7 @@ namespace flickr_up
 
         private void bgWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            txtResult.AppendText("photo upload complete.\n");
+            txtResult.AppendText("写真アップロード完了.\n");
         }
 
         private void txtPhotoPath_DragDrop(object sender, DragEventArgs e)
@@ -152,7 +156,6 @@ namespace flickr_up
                 e.Effect = DragDropEffects.Copy;
             else
                 e.Effect = DragDropEffects.None;
-
         }
 
         private List<PhotoLocal> GetPhotoPathList(String PhotoDir)
@@ -194,5 +197,54 @@ namespace flickr_up
             }
             return "";
         }
+
+        private void txtPhotoPath_TextChanged(object sender, EventArgs e)
+        {
+            Config.PhotoDirectory = txtPhotoPath.Text;
+        }
+
+        private void txtIMConvertPath_TextChanged(object sender, EventArgs e)
+        {
+            Config.IMConvertPath = txtIMConvertPath.Text;
+        }
+
+        private void txtAPIKey_TextChanged(object sender, EventArgs e)
+        {
+            Config.APIKey = txtAPIKey.Text;
+        }
+
+        private void txtSecret_TextChanged(object sender, EventArgs e)
+        {
+            Config.Secret = txtSecret.Text;
+        }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+        }
+
+        private void SetupWindow()
+        {
+            txtSecret.Text = Config.Secret;
+            txtPhotoPath.Text = Config.PhotoDirectory;
+            txtIMConvertPath.Text = Config.IMConvertPath;
+            txtAPIKey.Text = Config.APIKey;
+            txtSecret.Text = Config.Secret;
+        }
+
+        private void txtIMConvertPath_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+            txtIMConvertPath.Text = files[0];
+        }
+
+        private void txtIMConvertPath_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.Copy;
+            else
+                e.Effect = DragDropEffects.None;
+        }
+
+
     }
 }

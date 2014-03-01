@@ -11,5 +11,11 @@
     <Setting Name="OAuthToken" Type="FlickrNet.OAuthAccessToken" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="PhotoDirectory" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="IMConvertPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>
