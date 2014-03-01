@@ -22,7 +22,7 @@ namespace flickr_up
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnAuth_Click(object sender, EventArgs e)
         {
             Flickr flickr = new Flickr(APIKey, Secret);
 
@@ -34,7 +34,7 @@ namespace flickr_up
             System.Diagnostics.Process.Start(uri);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnAuthComplete_Click(object sender, EventArgs e)
         {
             String verify = txtVerifier.Text;
             if (String.IsNullOrEmpty(verify))

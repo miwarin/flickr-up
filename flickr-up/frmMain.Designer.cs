@@ -42,7 +42,7 @@
             this.btnAuth.TabIndex = 0;
             this.btnAuth.Text = "認証";
             this.btnAuth.UseVisualStyleBackColor = true;
-            this.btnAuth.Click += new System.EventHandler(this.button1_Click);
+            this.btnAuth.Click += new System.EventHandler(this.btnAuth_Click);
             // 
             // btnAuthComplete
             // 
@@ -52,7 +52,7 @@
             this.btnAuthComplete.TabIndex = 1;
             this.btnAuthComplete.Text = "完了";
             this.btnAuthComplete.UseVisualStyleBackColor = true;
-            this.btnAuthComplete.Click += new System.EventHandler(this.button2_Click);
+            this.btnAuthComplete.Click += new System.EventHandler(this.btnAuthComplete_Click);
             // 
             // txtVerifier
             // 
