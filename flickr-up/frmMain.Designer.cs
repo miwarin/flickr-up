@@ -51,17 +51,17 @@
             this.txtTags = new System.Windows.Forms.TextBox();
             this.txtPhotoPath = new System.Windows.Forms.TextBox();
             this.btnUpload = new System.Windows.Forms.Button();
-            this.tabImageMagick = new System.Windows.Forms.TabPage();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtIMConvertPath = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtResize = new System.Windows.Forms.TextBox();
+            this.tabImage = new System.Windows.Forms.TabPage();
             this.label10 = new System.Windows.Forms.Label();
             this.txtWorkDirectory = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtResize = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtIMConvertPath = new System.Windows.Forms.TextBox();
             this.tabFlickr.SuspendLayout();
             this.tabAuth.SuspendLayout();
             this.tabUpload.SuspendLayout();
-            this.tabImageMagick.SuspendLayout();
+            this.tabImage.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtResult
@@ -92,7 +92,7 @@
             // 
             this.tabFlickr.Controls.Add(this.tabAuth);
             this.tabFlickr.Controls.Add(this.tabUpload);
-            this.tabFlickr.Controls.Add(this.tabImageMagick);
+            this.tabFlickr.Controls.Add(this.tabImage);
             this.tabFlickr.Location = new System.Drawing.Point(12, 12);
             this.tabFlickr.Name = "tabFlickr";
             this.tabFlickr.SelectedIndex = 0;
@@ -291,65 +291,25 @@
             this.btnUpload.UseVisualStyleBackColor = true;
             this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
             // 
-            // tabImageMagick
+            // tabImage
             // 
-            this.tabImageMagick.Controls.Add(this.label10);
-            this.tabImageMagick.Controls.Add(this.txtWorkDirectory);
-            this.tabImageMagick.Controls.Add(this.label9);
-            this.tabImageMagick.Controls.Add(this.txtResize);
-            this.tabImageMagick.Controls.Add(this.label8);
-            this.tabImageMagick.Controls.Add(this.txtIMConvertPath);
-            this.tabImageMagick.Location = new System.Drawing.Point(4, 22);
-            this.tabImageMagick.Name = "tabImageMagick";
-            this.tabImageMagick.Size = new System.Drawing.Size(568, 276);
-            this.tabImageMagick.TabIndex = 2;
-            this.tabImageMagick.Text = "ImageMagick";
-            this.tabImageMagick.UseVisualStyleBackColor = true;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(77, 26);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(139, 12);
-            this.label8.TabIndex = 20;
-            this.label8.Text = "ImageMagick convert path";
-            // 
-            // txtIMConvertPath
-            // 
-            this.txtIMConvertPath.AllowDrop = true;
-            this.txtIMConvertPath.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txtIMConvertPath.Location = new System.Drawing.Point(79, 41);
-            this.txtIMConvertPath.Name = "txtIMConvertPath";
-            this.txtIMConvertPath.Size = new System.Drawing.Size(443, 19);
-            this.txtIMConvertPath.TabIndex = 19;
-            this.txtIMConvertPath.TextChanged += new System.EventHandler(this.txtIMConvertPath_TextChanged);
-            this.txtIMConvertPath.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtIMConvertPath_DragDrop);
-            this.txtIMConvertPath.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtIMConvertPath_DragEnter);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(9, 69);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(43, 12);
-            this.label9.TabIndex = 27;
-            this.label9.Text = "倍率(%)";
-            // 
-            // txtResize
-            // 
-            this.txtResize.AllowDrop = true;
-            this.txtResize.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txtResize.Location = new System.Drawing.Point(79, 66);
-            this.txtResize.Name = "txtResize";
-            this.txtResize.Size = new System.Drawing.Size(443, 19);
-            this.txtResize.TabIndex = 26;
-            this.txtResize.TextChanged += new System.EventHandler(this.txtResize_TextChanged);
+            this.tabImage.Controls.Add(this.label10);
+            this.tabImage.Controls.Add(this.txtWorkDirectory);
+            this.tabImage.Controls.Add(this.label9);
+            this.tabImage.Controls.Add(this.txtResize);
+            this.tabImage.Controls.Add(this.label8);
+            this.tabImage.Controls.Add(this.txtIMConvertPath);
+            this.tabImage.Location = new System.Drawing.Point(4, 22);
+            this.tabImage.Name = "tabImage";
+            this.tabImage.Size = new System.Drawing.Size(568, 276);
+            this.tabImage.TabIndex = 2;
+            this.tabImage.Text = "Image";
+            this.tabImage.UseVisualStyleBackColor = true;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(9, 94);
+            this.label10.Location = new System.Drawing.Point(15, 94);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(64, 12);
             this.label10.TabIndex = 29;
@@ -359,13 +319,53 @@
             // 
             this.txtWorkDirectory.AllowDrop = true;
             this.txtWorkDirectory.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.txtWorkDirectory.Location = new System.Drawing.Point(79, 91);
+            this.txtWorkDirectory.Location = new System.Drawing.Point(85, 91);
             this.txtWorkDirectory.Name = "txtWorkDirectory";
             this.txtWorkDirectory.Size = new System.Drawing.Size(443, 19);
             this.txtWorkDirectory.TabIndex = 28;
             this.txtWorkDirectory.TextChanged += new System.EventHandler(this.txtWorkDirectory_TextChanged);
             this.txtWorkDirectory.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtWorkDirectory_DragDrop);
             this.txtWorkDirectory.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtWorkDirectory_DragEnter);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(36, 69);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(43, 12);
+            this.label9.TabIndex = 27;
+            this.label9.Text = "倍率(%)";
+            // 
+            // txtResize
+            // 
+            this.txtResize.AllowDrop = true;
+            this.txtResize.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txtResize.Location = new System.Drawing.Point(85, 66);
+            this.txtResize.Name = "txtResize";
+            this.txtResize.Size = new System.Drawing.Size(443, 19);
+            this.txtResize.TabIndex = 26;
+            this.txtResize.TextChanged += new System.EventHandler(this.txtResize_TextChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 44);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(77, 12);
+            this.label8.TabIndex = 20;
+            this.label8.Text = "irfanview path";
+            // 
+            // txtIMConvertPath
+            // 
+            this.txtIMConvertPath.AllowDrop = true;
+            this.txtIMConvertPath.Font = new System.Drawing.Font("ＭＳ ゴシック", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.txtIMConvertPath.Location = new System.Drawing.Point(85, 41);
+            this.txtIMConvertPath.Name = "txtIMConvertPath";
+            this.txtIMConvertPath.Size = new System.Drawing.Size(443, 19);
+            this.txtIMConvertPath.TabIndex = 19;
+            this.txtIMConvertPath.TextChanged += new System.EventHandler(this.txtIMConvertPath_TextChanged);
+            this.txtIMConvertPath.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtIMConvertPath_DragDrop);
+            this.txtIMConvertPath.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtIMConvertPath_DragEnter);
             // 
             // frmMain
             // 
@@ -383,8 +383,8 @@
             this.tabAuth.PerformLayout();
             this.tabUpload.ResumeLayout(false);
             this.tabUpload.PerformLayout();
-            this.tabImageMagick.ResumeLayout(false);
-            this.tabImageMagick.PerformLayout();
+            this.tabImage.ResumeLayout(false);
+            this.tabImage.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -415,7 +415,7 @@
         private System.Windows.Forms.TextBox txtTags;
         private System.Windows.Forms.TextBox txtPhotoPath;
         private System.Windows.Forms.Button btnUpload;
-        private System.Windows.Forms.TabPage tabImageMagick;
+        private System.Windows.Forms.TabPage tabImage;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtIMConvertPath;
         private System.Windows.Forms.Label label10;

@@ -159,13 +159,13 @@ namespace flickr_up
         {
             ProcessStartInfo psi = new ProcessStartInfo();
 
-            psi.FileName = Config.IMConvertPath;
+            psi.FileName = Config.IrfanviewPath;
             psi.RedirectStandardInput = false;
             psi.RedirectStandardOutput = true;
             psi.RedirectStandardError = true;
             psi.UseShellExecute = false;
             psi.CreateNoWindow = true;
-            psi.Arguments = String.Format("-verbose -resize {0}% {1} {2}", resize, srcimg, dstimg);
+            psi.Arguments = String.Format("{0} /resize=({1}p,{1}p) /convert={2}", srcimg, resize, dstimg);
             Process p = Process.Start(psi);
             //string results = p.StandardOutput.ReadToEnd();
             string results = p.StandardError.ReadToEnd();
@@ -251,7 +251,7 @@ namespace flickr_up
 
         private void txtIMConvertPath_TextChanged(object sender, EventArgs e)
         {
-            Config.IMConvertPath = txtIMConvertPath.Text;
+            Config.IrfanviewPath = txtIMConvertPath.Text;
         }
 
         private void txtAPIKey_TextChanged(object sender, EventArgs e)
@@ -272,7 +272,7 @@ namespace flickr_up
         {
             txtSecret.Text = Config.Secret;
             txtPhotoPath.Text = Config.PhotoDirectory;
-            txtIMConvertPath.Text = Config.IMConvertPath;
+            txtIMConvertPath.Text = Config.IrfanviewPath;
             txtWorkDirectory.Text = Config.WorkDirectory;
             txtResize.Text = String.Format("{0}", Config.Resize);
             txtAPIKey.Text = Config.APIKey;

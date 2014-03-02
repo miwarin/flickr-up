@@ -73,12 +73,12 @@ namespace flickr_up.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string IMConvertPath {
+        public string IrfanviewPath {
             get {
-                return ((string)(this["IMConvertPath"]));
+                return ((string)(this["IrfanviewPath"]));
             }
             set {
-                this["IMConvertPath"] = value;
+                this["IrfanviewPath"] = value;
             }
         }
         

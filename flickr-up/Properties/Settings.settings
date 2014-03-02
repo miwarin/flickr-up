@@ -14,7 +14,7 @@
     <Setting Name="PhotoDirectory" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="IMConvertPath" Type="System.String" Scope="User">
+    <Setting Name="IrfanviewPath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="WorkDirectory" Type="System.String" Scope="User">

@@ -48,15 +48,15 @@ namespace flickr_up
             }
         }
 
-        public static String IMConvertPath
+        public static String IrfanviewPath
         {
             get
             {
-                return Properties.Settings.Default.IMConvertPath;
+                return Properties.Settings.Default.IrfanviewPath;
             }
             set
             {
-                Properties.Settings.Default.IMConvertPath = value;
+                Properties.Settings.Default.IrfanviewPath = value;
                 Properties.Settings.Default.Save();
             }
         }
