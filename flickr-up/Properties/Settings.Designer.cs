@@ -81,5 +81,29 @@ namespace flickr_up.Properties {
                 this["IMConvertPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string WorkDirectory {
+            get {
+                return ((string)(this["WorkDirectory"]));
+            }
+            set {
+                this["WorkDirectory"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int Resize {
+            get {
+                return ((int)(this["Resize"]));
+            }
+            set {
+                this["Resize"] = value;
+            }
+        }
     }
 }

@@ -60,7 +60,34 @@ namespace flickr_up
                 Properties.Settings.Default.Save();
             }
         }
-        
+
+        public static String WorkDirectory
+        {
+            get
+            {
+                return Properties.Settings.Default.WorkDirectory;
+            }
+            set
+            {
+                Properties.Settings.Default.WorkDirectory = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        public static int Resize
+        {
+            get
+            {
+                return Properties.Settings.Default.Resize;
+            }
+            set
+            {
+                Properties.Settings.Default.Resize = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+
         public static OAuthAccessToken OAuthToken
         {
             get

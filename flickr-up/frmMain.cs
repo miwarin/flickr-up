@@ -81,7 +81,7 @@ namespace flickr_up
             List<PhotoLocal> PhotofileList = GetPhotoPathList(txtPhotoPath.Text);
             if (PhotofileList == null || PhotofileList.Count == 0)
             {
-                MessageBox.Show("JPEG のフォルダを指定してください");
+                MessageBox.Show("画像フォルダを指定してください");
                 return;
             }
 
@@ -90,14 +90,39 @@ namespace flickr_up
             String Sets = txtSets.Text;
             Boolean IsPrivate = false;
             List<String> PhotoID = new List<String>();
+            int resize = 100;
+
+            try
+            {
+                resize = Convert.ToInt32(txtResize.Text);
+            }
+            catch(FormatException ex)
+            {
+                txtResize.AppendText(ex.Message);
+            }
+
+            if(Directory.Exists(Config.WorkDirectory) == false)
+            {
+                Directory.CreateDirectory(Config.WorkDirectory);
+            }
+
 
             Flickr f = FlickrManager.GetAuthInstance();
             f.OnUploadProgress += new EventHandler<FlickrNet.UploadProgressEventArgs>(Flickr_OnUploadProgress);
 
             foreach (PhotoLocal photofile in PhotofileList)
             {
-                txtResult.AppendText(photofile.Title + " ...\n");
-                PhotoID.Add(f.UploadPicture(photofile.Path, photofile.Title, Desc, Tags, IsPrivate, false, false));
+                //txtResult.AppendText(photofile.Title + " ...\n");
+                Console.WriteLine(photofile.Title + " ...");
+                
+                String srcimg = photofile.Path;
+                String dstimg = System.IO.Path.Combine(
+                    Config.WorkDirectory, 
+                    Path.GetFileNameWithoutExtension(srcimg) + ".JPG");
+
+                Resize(srcimg, dstimg, resize);
+
+                PhotoID.Add(f.UploadPicture(dstimg, photofile.Title, Desc, Tags, IsPrivate, false, false));
             }
 
             if (String.IsNullOrEmpty(Sets) == true)
@@ -105,7 +130,8 @@ namespace flickr_up
                 return;
             }
 
-            txtResult.AppendText(String.Format("Create Sets: ${0} ...\n", Sets));
+            //txtResult.AppendText(String.Format("Create Sets: {0} ...\n", Sets));
+            Console.Write(String.Format("Create Sets: {0} ...\n", Sets));
 
             int StartIndex = 0;
             String PhotosetID;
@@ -128,6 +154,26 @@ namespace flickr_up
                 f.PhotosetsAddPhoto(PhotosetID, PhotoID[i]);
             }
         }
+
+        private void Resize(String srcimg, String dstimg, int resize)
+        {
+            ProcessStartInfo psi = new ProcessStartInfo();
+
+            psi.FileName = Config.IMConvertPath;
+            psi.RedirectStandardInput = false;
+            psi.RedirectStandardOutput = true;
+            psi.RedirectStandardError = true;
+            psi.UseShellExecute = false;
+            psi.CreateNoWindow = true;
+            psi.Arguments = String.Format("-verbose -resize {0}% {1} {2}", resize, srcimg, dstimg);
+            Process p = Process.Start(psi);
+            //string results = p.StandardOutput.ReadToEnd();
+            string results = p.StandardError.ReadToEnd();
+            p.WaitForExit();
+            Console.WriteLine(results);
+            //txtResult.AppendText(results + "\n");
+        }
+
 
         private void Flickr_OnUploadProgress(object sender, FlickrNet.UploadProgressEventArgs e)
         {
@@ -170,10 +216,10 @@ namespace flickr_up
             string[] files = Directory.GetFiles(PhotoDir);
             foreach(String file in files)
             {
-                String ext = Path.GetExtension(file).ToLower();
-                if(ext == ".jpg")
+                //String ext = Path.GetExtension(file).ToLower();
+                //if(ext == ".jpg")
                 {
-                    String title = Path.GetFileName(file);
+                    String title = Path.GetFileNameWithoutExtension(file);
                     PhotoLocal p = new PhotoLocal(file, title);
                     list.Add(p);
                 }
@@ -227,6 +273,8 @@ namespace flickr_up
             txtSecret.Text = Config.Secret;
             txtPhotoPath.Text = Config.PhotoDirectory;
             txtIMConvertPath.Text = Config.IMConvertPath;
+            txtWorkDirectory.Text = Config.WorkDirectory;
+            txtResize.Text = String.Format("{0}", Config.Resize);
             txtAPIKey.Text = Config.APIKey;
             txtSecret.Text = Config.Secret;
         }
@@ -243,6 +291,41 @@ namespace flickr_up
                 e.Effect = DragDropEffects.Copy;
             else
                 e.Effect = DragDropEffects.None;
+        }
+
+        private void txtResize_TextChanged(object sender, EventArgs e)
+        {
+            int resize = 100;
+
+            try
+            {
+                resize = Convert.ToInt32(txtResize.Text);
+            }
+            catch(FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            Config.Resize = resize;
+        }
+
+        private void txtWorkDirectory_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+            txtWorkDirectory.Text = files[0];
+        }
+
+        private void txtWorkDirectory_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.Copy;
+            else
+                e.Effect = DragDropEffects.None;
+        }
+
+        private void txtWorkDirectory_TextChanged(object sender, EventArgs e)
+        {
+            Config.WorkDirectory = txtWorkDirectory.Text;
         }
 
 
