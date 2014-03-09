@@ -327,7 +327,5 @@ namespace flickr_up
         {
             Config.WorkDirectory = txtWorkDirectory.Text;
         }
-
-
     }
 }

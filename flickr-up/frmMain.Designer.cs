@@ -178,6 +178,7 @@
             this.btnAuthComplete.TabIndex = 4;
             this.btnAuthComplete.Text = "完了";
             this.btnAuthComplete.UseVisualStyleBackColor = true;
+            this.btnAuthComplete.Click += new System.EventHandler(this.btnAuthComplete_Click);
             // 
             // btnAuth
             // 
@@ -187,6 +188,7 @@
             this.btnAuth.TabIndex = 3;
             this.btnAuth.Text = "認証";
             this.btnAuth.UseVisualStyleBackColor = true;
+            this.btnAuth.Click += new System.EventHandler(this.btnAuth_Click);
             // 
             // tabUpload
             // 
@@ -280,6 +282,8 @@
             this.txtPhotoPath.Size = new System.Drawing.Size(443, 19);
             this.txtPhotoPath.TabIndex = 16;
             this.txtPhotoPath.TextChanged += new System.EventHandler(this.txtPhotoPath_TextChanged);
+            this.txtPhotoPath.DragDrop += new System.Windows.Forms.DragEventHandler(this.txtPhotoPath_DragDrop);
+            this.txtPhotoPath.DragEnter += new System.Windows.Forms.DragEventHandler(this.txtPhotoPath_DragEnter);
             // 
             // btnUpload
             // 
